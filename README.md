@@ -1,23 +1,26 @@
 
 # montecarlo
-I wrote this Monte Carlo experiment to calculate the probabily of a retirement account reaching $1 Million.
+I wrote this Monte Carlo experiment to calculate the probability of a retirement account reaching $1 Million.
 
-At a high level, this is done by generating randomized annual returns. 
-For each year before retirement, The balance is multiplied by the return percentage and added (or subtracted for a negative annual return) to make the new balance.
+At a high level, this is done by generating many randomized annual returns.
+The current balance is multiplied by a return percentage and added (or subtracted for a negative annual return) to make a new balance.
+For each year before the retirement age, the calculation with a new random annual return to get the new balance is repeated until the end balance is found.
 
-The experiment is run 500 times and finally, the percentage of runs where the end balance exceeds $1 Million is shown.
+The experiment is run 500 times and finally, from the 500 end balances, we calculate the success rate where the end balance exceeds $1 Million.
 
-## Data and Assumptions
-The annual return of the S&P 500 index from 1927 until now can be found at [macrotrends.net](https://www.macrotrends.net/2526/sp-500-historical-annual-returns).
+## Data, Assumptions and Disclaimer
+The annual return of the S&P-500 index from 1927 until now can be found at [macrotrends.net](https://www.macrotrends.net/2526/sp-500-historical-annual-returns).
 
 Using this data, the average annual return is 7.9% with a standard deviation of 19.
 
 These values are fed into the `numpy.random.normal` method to generate random return values with a Normal distribution.
-Better random annual returns can be had with a distribution model that more accurately fits historical S&P 500 returns.
+Better random annual returns can be had with a distribution model that more accurately fits historical S&P-500 returns.
 
 Always remember: Past performance is no guarantee of future results.
 
-## To Run
+**This is a programming exercise and not financial advice.**
+
+## Set-Up
 Modern version of [python3](https://www.python.org/downloads/), ie. 3.8 or newer.
 
 ## Installation
