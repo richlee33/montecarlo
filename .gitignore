@@ -1,3 +1,5 @@
 venv/
-results/
 *.csv
+results/*.png
+results/*.csv
+.idea

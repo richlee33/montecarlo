@@ -7,7 +7,7 @@ For each year before retirement, The balance is multiplied by the return percent
 
 The experiment is run 500 times and finally, the percentage of runs where the end balance exceeds $1 Million is shown.
 
-##Data and Assumptions
+## Data and Assumptions
 The annual return of the S&P 500 index from 1927 until now can be found at [macrotrends.net](https://www.macrotrends.net/2526/sp-500-historical-annual-returns).
 
 Using this data, the average annual return is 7.9% with a standard deviation of 19.
@@ -25,6 +25,7 @@ Set up environment:
 ```sh
 $ git clone <repo url>
 $ cd montecarlo
+$ mkdir results
 $ python3 -m venv .
 $ source bin/activate
 $ pip install -r requirements.txt
