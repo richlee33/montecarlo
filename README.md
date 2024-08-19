@@ -6,7 +6,7 @@ At a high level, this is done by generating many randomized annual returns.
 The current balance is multiplied by a return percentage and added (or subtracted for a negative annual return) to make a new balance.
 For each year before the retirement age, the calculation with a new random annual return to get the new balance is repeated until the end balance is found.
 
-The experiment is run 500 times and finally, from the 500 end balances, we calculate the success rate where the end balance exceeds $1 Million.
+The experiment repeated 500 times and finally, from the 500 end balances, the success rate where the end balance exceeds $1 Million is calculated.
 
 ## Data, Assumptions and Disclaimer
 The annual return of the S&P-500 index from 1927 until now can be found at [macrotrends.net](https://www.macrotrends.net/2526/sp-500-historical-annual-returns).
@@ -69,7 +69,7 @@ max           1000.0      250000.0   48320946.0            16.0
 ============================================================
 Success rate of end balance greater than 1000000: 0.692
 ```
-### Sample End Balance Distribution:
+### Sample End Balance Distribution Histogram:
 ![Sample Plot](docs/Figure_1.png)
 
 
@@ -84,29 +84,34 @@ annual_contribution = 5000
 end_balance_goal = 1000000
 ```
 
-### View plots for annual return distribution and balance each year
-For each rep, the annual return percentage distribution plot can be shown by changing the `view_annual_return_plot` value.
+### View plots for Annual Return Distribution and Balance Each Year
+For each repetition, the annual return percentage distribution plot can be shown by changing the `view_annual_return_plot = True`.
 Default `False`
 
-Similarly, the balance of the account can be shown in a line plot by changing the `view_annual_balance_plot`.
+Similarly, the balance of the account can be shown in a line plot by changing the `view_annual_balance_plot = True`.
 This is useful to get a visual of the balance over time.  Default `False`
 
-NOTE: These `num_reps` value should be lowered to `10` or less otherwise each repetition will require manually closing the plot for the experiment to conclude.
+NOTE: The `num_reps` value should be lowered to `10` or less otherwise each rep will require manually closing the plot for the experiment to conclude.
+This is because by default the simulation runs 500 reps of the experiment to finally calculate the success rate.
+
 ```shell script
 view_annual_return_plot = True
 view_annual_balance_plot = True
 ```
-#### Sample Annual Return Distribution:
+#### Sample Annual Return Distribution Histogram:
 ![Sample Plot](docs/annual_ret_dist.png)
 
-#### Sample Balance Over Time:
+#### Sample Balance Over Time Graph:
 ![Sample Plot](docs/end_balance_graph.png)
 
 ### Output summary table and plots to disk
-Useful if running the experiment in a script, that way the plots and summary table can be examined asynchronously.  The files save to the `results` directory.  Default `False`.
+Useful if running the experiment in a script or for post run testing, set the `output_files = True` to save summary table and plots to disk.
+that way the plots and summary table can be examined asynchronously.
+The files save to the `results` directory.  Default `False`.
 ```shell script
 output_files = True
 ```
+
 
 ## Testing
 The main components of this Monte Carlo experiment are the randomization of the annual returns and calculation of the balances.
@@ -116,26 +121,22 @@ The approach to verifying a Normal distribution of the annual return values is t
 
 Using the `view_annual_return_plot = True` [setting](#view-plots-for-annual-return-distribution-and-balance-each-year), the histogram is shown where we can visually confirm the expected distribution.  
 
-The setting also outputs a summary table to the console, where we can verify the annual return mean, and the standard deviation values
-closely matching the parameters passed into the `np.random.normal` method.
+The setting also outputs a summary table to the console, where we can verify the annual return mean and the standard deviation values
+are closely matching the parameters passed into the `np.random.normal` method.
 ```shell script
 === Annual Return Summary Table ===
        annual_return       balance
-count      49.000000  4.900000e+01
+... 
 mean        8.349184  4.197155e+05
 std        17.996669  3.763619e+05
-min       -26.840000  6.351800e+03
-25%        -3.540000  1.204824e+05
-50%         5.580000  3.305943e+05
-75%        21.380000  6.587142e+05
-max        49.410000  1.434930e+06
-===================================
+...
 ```
 
 ### End Balance
-The balances calculated every year can be verified by the `view_annual_balance_plot = True` [setting](#view-plots-for-annual-return-distribution-and-balance-each-year).  A line graph of the balance over time will be shown to visually check the balances are going up and down as expected.
+The balances calculated every year can be verified by the `view_annual_balance_plot = True` [setting](#view-plots-for-annual-return-distribution-and-balance-each-year).
+A line graph of the balance over time will be shown to visually check the balances are going up and down as expected.
 
-A way to verify the annual contributions are getting added to the balance, is to set the `annual_contribution` to `0` or a negative value and see how this affects the success rate values.
+An indirect way to verify the annual contributions are getting added to the balance, is to set the `annual_contribution` to `0` or a negative value and see how this affects the success rate values.
 
 ## Automated Testing
 There are two test programs that will parse output files for expected values generated after the simulation is run.
@@ -148,10 +149,13 @@ $ python test_summary.py
 $ python test_success_rate.py
 ```
 ### test_summary.py
-The `allstats.csv` file contains the summary statistics from a run of the simulation.  Running `main.py` 100 times will result in 100 of these files.
-The `test_summary.py` program reads every summary statistics file and verifies both the mean and standard deviation of the end balance and average return are within an expected range.
+The `allstats.csv` file contains the summary statistics from a run of the simulation.  Running `main.py` 100 times will result in 100 of these .csv files.
+
+The `test_summary.py` program reads every summary statistics csv file and verifies both the mean and standard deviation of the end balance and average return are within an expected range.
 
 ### test_success_rate.py
-After each run of the simulation, the success rate is appended to the `success_rate.csv` file.
-The success rate's minimum and maximum values are verified to be within an expected range.
+After each run of the simulation, the success rate is appended to the `success_rate.csv` file.  The file is created automatically if it does not exist.
+Running `main.py` 100 times will generate a single csv file containing 100 lines.
+
+The `test_success_rate.py` program will read the `success_rate.csv` file and verify the success rate's minimum and maximum values to be within an expected range.
 I choose to verify the min/smallest and max/largest values rather than the mean so the test more sensitive to changes in the simulation.
