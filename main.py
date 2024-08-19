@@ -4,16 +4,18 @@ import pandas as pd
 import random
 from statistics import mean
 
+# vars for S&P market return
 market_average = 7.9
 market_stdev = 19
 
+# vars for program behavior
 num_reps = 500
 num_bins = 15
 view_annual_return_plot = False  # set to True only with a low num_reps since every single rep will display a plot
 view_annual_balance_plot = False  # set to True only with a low num_reps since every single rep will display a plot
 output_files = False
 
-# vars to modify for simulation
+# vars of user for simulation
 age = 16
 start_balance = 1000
 retire_age = 65
@@ -89,7 +91,6 @@ if output_files:
     # Save cleaned end balance distribution histogram
     df_all_stats['end_balance'].plot(kind='hist', bins=num_bins, xticks=[], xlabel='', yticks=[], ylabel='')
     plt.savefig(png_clean_filename)
-    #plt.show()
     plt.close()
 
 df_all_stats['end_balance'].plot(kind='hist', title="End Balance Distribution", bins=num_bins, grid=True)

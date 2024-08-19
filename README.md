@@ -6,7 +6,7 @@ At a high level, this is done by generating many randomized annual returns.
 The current balance is multiplied by a return percentage and added (or subtracted for a negative annual return) to make a new balance.
 For each year before the retirement age, the calculation with a new random annual return to get the new balance is repeated until the end balance is found.
 
-The experiment repeated 500 times and finally, from the 500 end balances, the success rate where the end balance exceeds $1 Million is calculated.
+The simulation repeated 500 times and finally, from the 500 end balances, the success rate where the end balance exceeds $1 Million is calculated.
 
 ## Data, Assumptions and Disclaimer
 The annual return of the S&P-500 index from 1927 until now can be found at [macrotrends.net](https://www.macrotrends.net/2526/sp-500-historical-annual-returns).
@@ -92,7 +92,7 @@ Similarly, the balance of the account can be shown in a line plot by changing th
 This is useful to get a visual of the balance over time.  Default `False`
 
 NOTE: The `num_reps` value should be lowered to `10` or less otherwise each rep will require manually closing the plot for the experiment to conclude.
-This is because by default the simulation runs 500 reps of the experiment to finally calculate the success rate.
+This is because by default the program runs 500 reps of the simulation to finally calculate the success rate.
 
 ```shell script
 view_annual_return_plot = True
@@ -139,9 +139,9 @@ A line graph of the balance over time will be shown to visually check the balanc
 An indirect way to verify the annual contributions are getting added to the balance, is to set the `annual_contribution` to `0` or a negative value and see how this affects the success rate values.
 
 ## Automated Testing
-There are two test programs that will parse output files for expected values generated after the simulation is run.
+There are two test programs that will parse output files for expected values generated after the experiment is run.
 The `output_files = True` [setting](#output-summary-table-and-plots-to-disk), will save to disk, several files that are consumed by the test programs.
-A Continuous Integration (CI) job can be built to run these test programs to verify code changes did not unexpectedly affect the simulation results.
+A Continuous Integration (CI) job can be built to run these test programs to verify code changes did not unexpectedly affect the experiment results.
 
 ### Run
 ```sh
@@ -149,13 +149,13 @@ $ python test_summary.py
 $ python test_success_rate.py
 ```
 ### test_summary.py
-The `allstats.csv` file contains the summary statistics from a run of the simulation.  Running `main.py` 100 times will result in 100 of these .csv files.
+The `allstats.csv` file contains the summary statistics from a run of the experiment.  Running `main.py` 100 times will result in 100 of these .csv files.
 
 The `test_summary.py` program reads every summary statistics csv file and verifies both the mean and standard deviation of the end balance and average return are within an expected range.
 
 ### test_success_rate.py
-After each run of the simulation, the success rate is appended to the `success_rate.csv` file.  The file is created automatically if it does not exist.
+After each run of the experiment, the success rate is appended to the `success_rate.csv` file.  The file is created automatically if it does not exist.
 Running `main.py` 100 times will generate a single csv file containing 100 lines.
 
 The `test_success_rate.py` program will read the `success_rate.csv` file and verify the success rate's minimum and maximum values to be within an expected range.
-I choose to verify the min/smallest and max/largest values rather than the mean so the test more sensitive to changes in the simulation.
+I choose to verify the min/smallest and max/largest values rather than the mean so the test more sensitive to changes in the experiment.
