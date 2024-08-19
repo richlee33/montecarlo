@@ -1,7 +1,12 @@
+import sys
 import glob
 import pandas as pd
 
 csv_files = glob.glob('results/allstats*.csv')
+
+if len(csv_files) == 0:
+    print("The results/allstats*.csv files were not found.  Run main.py with the 'output_files = False' setting")
+    sys.exit(1)
 
 for item in csv_files:
     df = pd.read_csv(item)

@@ -1,6 +1,11 @@
+import sys
 import pandas as pd
 
-df = pd.read_csv('results/success_rate.csv', header=None, usecols=[2])
+try:
+    df = pd.read_csv('results/success_rate.csv', header=None, usecols=[2])
+except FileNotFoundError:
+    print("The results/success_rate.csv file was not found.  Run main.py with the 'output_files = False' setting")
+    sys.exit(1)
 
 df_summary = df.describe()
 #print(df_summary)
