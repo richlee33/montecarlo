@@ -107,3 +107,51 @@ Useful if running the experiment in a script, that way the plots and summary tab
 ```shell script
 output_files = True
 ```
+
+## Testing
+The main components of this Monte Carlo experiment are the randomization of the annual returns and calculation of the balances.
+
+### Annual Return Distribution
+The approach to verifying a Normal distribution of the annual return values is to view the Annual Return Distribution histogram plot and verify the summary stats outputted match the mean and standard deviation values set in the program.
+
+Using the `view_annual_return_plot = True` setting, the histogram is shown where we can visually confirm the expected distribution.  
+
+The setting also outputs a summary table to the console, where we can verify the annual return mean, and the standard deviation values
+closely matching the parameters passed into the `np.random.normal` method.
+```shell script
+=== Annual Return Summary Table ===
+       annual_return       balance
+count      49.000000  4.900000e+01
+mean        8.349184  4.197155e+05
+std        17.996669  3.763619e+05
+min       -26.840000  6.351800e+03
+25%        -3.540000  1.204824e+05
+50%         5.580000  3.305943e+05
+75%        21.380000  6.587142e+05
+max        49.410000  1.434930e+06
+===================================
+```
+
+### End Balance
+The balances calculated every year can be verified by the `view_annual_balance_plot = True` setting.  A line graph of the balance over time will be shown to visually check the balances are going up and down as expected.
+
+A way to verify the annual contributions are getting added to the balance, is to set the `annual_contribution` to 0 or a negative value and see how this affects the success rate values.
+
+## Automated Testing
+There are two test programs that will parse output files for expected values generated after the simulation is run.
+The `output_files = True` setting, will save to disk, several files that are consumed by the test programs.
+A Continuous Integration (CI) job can be built to run these test programs to verify code changes did not unexpectedly affect the simulation results.
+
+### Run
+```sh
+$ python test_summary.py
+$ python test_success_rate.py
+```
+### test_summary.py
+The `allstats.csv` file contains the summary statistics from a run of the simulation.  Running `main.py` 500 times will result in 500 of these files.
+The `test_summary.py` program reads every summary statistics file and verifies both the mean and standard deviation of the end balance and average return are in an expected range.
+
+### test_success_rate.py
+After each run of the simulation, the success rate is appended to the `success_rate.csv` file.
+The success rate's minimum and maximum values are verified to be in an expected range.
+I choose to verify the min/smallest and max/largest values rather than the mean so the test more sensitive to changes in the simulation.

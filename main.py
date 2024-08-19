@@ -9,8 +9,8 @@ market_stdev = 19
 
 num_reps = 500
 num_bins = 15
-view_annual_return_plot = True  # set to True only with a low num_reps since every single rep will display a plot
-view_annual_balance_plot = True  # set to True only with a low num_reps since every single rep will display a plot
+view_annual_return_plot = False  # set to True only with a low num_reps since every single rep will display a plot
+view_annual_balance_plot = False  # set to True only with a low num_reps since every single rep will display a plot
 output_files = False
 
 # vars to modify for simulation
@@ -79,9 +79,14 @@ png_filename = "results/end_balance_dist_%s.png" % (random_digits)
 png_clean_filename = "results/end_balance_dist_clean_%s.png" % (random_digits)
 
 if output_files:
-    # Save summary table and distribution plots
+    # Save summary table
     df_all_stats.describe().to_csv(csv_filename)
 
+    # Save success rate
+    with open('results/success_rate.csv', 'a') as f:
+        f.write(repr(random_digits) + ',' + repr(end_balance_goal) + ',' + repr(success_rate) + '\n')
+
+    # Save cleaned end balance distribution histogram
     df_all_stats['end_balance'].plot(kind='hist', bins=num_bins, xticks=[], xlabel='', yticks=[], ylabel='')
     plt.savefig(png_clean_filename)
     #plt.show()
@@ -90,6 +95,7 @@ if output_files:
 df_all_stats['end_balance'].plot(kind='hist', title="End Balance Distribution", bins=num_bins, grid=True)
 plt.axvline(x = end_balance_goal, c = 'r')
 if output_files:
+    # Save end balance distribution histogram
     plt.savefig(png_filename)
 else:
     plt.show()
