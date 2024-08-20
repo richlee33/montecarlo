@@ -1,0 +1,25 @@
+name: Run and Test
+on:
+  push:
+    branches: ["master"]
+  pull_request:
+    branches: ["master"]
+
+jobs:
+  build:
+
+    runs-on: python:3.11
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+      - name: Create results dir
+        run: mkdir results
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Run experiment
+        run: python main.py output_files
+      - name: Test summary result values
+        run: python test_summary.py
+      - name: Test success rate values
+        run: python test_success_rate.py

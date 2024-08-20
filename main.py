@@ -29,9 +29,10 @@ contribution_balance = 0
 all_stats = []
 years_to_retire = retire_age - age
 
-# allow passing in output_files runtime flag to allow automated build/test workflows
-if sys.argv[1] == 'output_files':
-    output_files = True
+# allow passing in runtime flag to allow automated build/test workflows
+for item in sys.argv:
+    if item == 'output_files':
+        output_files = True
 
 for i in range(num_reps):
     current_balance_list = []
