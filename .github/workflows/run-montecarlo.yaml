@@ -23,6 +23,12 @@ jobs:
         run: pip install -r requirements.txt
       - name: Run experiment 10 times
         run: ./run_10.sh
+      - name: Archive results
+        uses: actions/upload-artifact@v4
+          with:
+            name: results
+            path: |
+              results/
       - name: Test summary result values
         run: python test_summary.py
       - name: Test success rate values
