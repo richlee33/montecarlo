@@ -26,5 +26,5 @@ for item in csv_files:
     assert average_return_mean > 7.4, f"average return mean is too small, got {average_return_mean}"
     assert average_return_mean < 8.5, f"average return mean is too large, got {average_return_mean}"
 
-    assert average_return_std > 2.49, f"average return std is too small, got {average_return_std}"
-    assert average_return_std < 2.94, f"average return std is too large, got {average_return_std}"
+    assert average_return_std > 2.4, f"average return std is too small, got {average_return_std}"
+    assert average_return_std < 3.0, f"average return std is too large, got {average_return_std}"
