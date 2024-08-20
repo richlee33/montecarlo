@@ -1,1 +1,1 @@
-FOR /l %i in (1,1,100) DO python main.py
+FOR /l %i in (1,1,100) DO python main.py output_files

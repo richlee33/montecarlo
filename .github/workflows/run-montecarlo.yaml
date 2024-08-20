@@ -21,8 +21,8 @@ jobs:
         run: mkdir results
       - name: Install dependencies
         run: pip install -r requirements.txt
-      - name: Run experiment
-        run: python main.py output_files
+      - name: Run experiment 10 times
+        run: ./run_10.sh
       - name: Test summary result values
         run: python test_summary.py
       - name: Test success rate values
