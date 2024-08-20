@@ -1,3 +1,4 @@
+import sys
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -28,9 +29,14 @@ contribution_balance = 0
 all_stats = []
 years_to_retire = retire_age - age
 
+# allow passing in output_files runtime flag to allow automated build/test workflows
+if sys.argv[1] == 'output_files':
+    output_files = True
+
 for i in range(num_reps):
     current_balance_list = []
 
+    #generate random average market returns in a normal distribution and store in a list
     annual_market_return_list = np.random.normal(market_average, market_stdev, years_to_retire).round(2)
 
     current_balance = start_balance
@@ -71,6 +77,7 @@ print("=" * 6 + " End Balance Summary Table %s Runs " %(num_reps) + "=" * 6)
 print(df_all_stats.describe().round(0))
 print("=" * 60)
 
+# calculate success rate by getting the count of end balances over the end goal amount divided by the number of reps
 success_rate = float(df_all_stats[df_all_stats['end_balance'] > end_balance_goal].count()['end_balance']) / float(num_reps)
 
 print("Success rate of end balance greater than %s: %s" %(end_balance_goal, success_rate))
@@ -89,11 +96,12 @@ if output_files:
     with open('results/success_rate.csv', 'a') as f:
         f.write(repr(random_digits) + ',' + repr(end_balance_goal) + ',' + repr(success_rate) + '\n')
 
-    # Save cleaned end balance distribution histogram
+    # Generate and save cleaned end balance distribution histogram
     df_all_stats['end_balance'].plot(kind='hist', bins=num_bins, xticks=[], xlabel='', yticks=[], ylabel='')
     plt.savefig(png_clean_filename)
     plt.close()
 
+# Generate end balance distribution histogram
 df_all_stats['end_balance'].plot(kind='hist', title="End Balance Distribution", bins=num_bins, grid=True)
 plt.axvline(x = end_balance_goal, c = 'r')
 if output_files:
