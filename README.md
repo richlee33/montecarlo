@@ -41,21 +41,6 @@ $ python main.py
 
 ### Sample Output:
 ```
-====== End Balance Table 500 Runs ======
-     start_balance  contribution  end_balance  average_return
-0             1000        250000     530956.0        4.860000
-1             1000        250000    5340032.0       12.386531
-2             1000        250000    4630970.0        9.062449
-3             1000        250000     998079.0        4.510000
-4             1000        250000     826731.0        7.439388
-..             ...           ...          ...             ...
-495           1000        250000    1861456.0        9.094082
-496           1000        250000    5137429.0       12.177347
-497           1000        250000     748437.0        6.220408
-498           1000        250000    1839859.0        7.693673
-499           1000        250000    2431553.0        7.890612
-
-[500 rows x 4 columns]
 ====== End Balance Summary Table 500 Runs ======
        start_balance  contribution  end_balance  average_return
 count          500.0         500.0        500.0           500.0
@@ -157,5 +142,4 @@ The `test_summary.py` program reads every summary statistics csv file and verifi
 After each run of the experiment, the success rate is appended to the `success_rate.csv` file.  The file is created automatically if it does not exist.
 Running `main.py` 100 times will generate a single csv file containing 100 lines.
 
-The `test_success_rate.py` program will read the `success_rate.csv` file and verify the success rate's minimum and maximum values to be within an expected range.
-I choose to verify the min/smallest and max/largest values rather than the mean so the test more sensitive to changes in the experiment.
+The `test_success_rate.py` program will read the `success_rate.csv` file and verify the success rate's mean and standard deviation are within an expected range.

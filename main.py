@@ -72,8 +72,6 @@ df_all_stats = pd.DataFrame.from_dict(all_stats)
 df_all_stats.round(4)
 
 # output End Balance summary table
-print("=" * 6 + " End Balance Table %s Runs " %(num_reps) + "=" * 6)
-print(df_all_stats)
 print("=" * 6 + " End Balance Summary Table %s Runs " %(num_reps) + "=" * 6)
 print(df_all_stats.describe().round(0))
 print("=" * 60)

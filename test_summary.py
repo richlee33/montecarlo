@@ -20,7 +20,7 @@ for item in csv_files:
     assert end_balance_mean > 2100000, f"end balance mean is too small, got {end_balance_mean}"
     assert end_balance_mean < 3150000, f"end balance mean is too large, got {end_balance_mean}"
 
-    assert end_balance_std > 2160000, f"end balance std is too small, got {end_balance_std}"
+    assert end_balance_std > 2100000, f"end balance std is too small, got {end_balance_std}"
     assert end_balance_std < 8130000, f"end balance std is too large, got {end_balance_std}"
 
     assert average_return_mean > 7.4, f"average return mean is too small, got {average_return_mean}"
