@@ -126,9 +126,14 @@ An indirect way to verify the annual contributions are getting added to the bala
 ## Automated Testing
 There are two test programs that will parse output files for expected values generated after the experiment is run.
 The `output_files = True` [setting](#output-summary-table-and-plots-to-disk), will save to disk, several files that are consumed by the test programs.
+
 A Continuous Integration (CI) job can be built to run these test programs to verify code changes did not unexpectedly affect the experiment results.
 
-### Run
+For example, view the Github [Workflow](https://github.com/richlee33/montecarlo/actions/workflows/run-montecarlo.yaml):
+
+![run-test-workflow](https://github.com/richlee33/montecarlo/actions/workflows/run-montecarlo.yaml/badge.svg)
+
+### Run Tests Locally
 ```sh
 $ python test_summary.py
 $ python test_success_rate.py
