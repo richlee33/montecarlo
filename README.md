@@ -1,5 +1,6 @@
-
 # montecarlo
+![run-test-workflow](https://github.com/richlee33/montecarlo/actions/workflows/run-montecarlo.yaml/badge.svg)
+
 I wrote this Monte Carlo experiment to calculate the probability of a retirement account reaching $1 Million.
 
 At a high level, this is done by generating many randomized annual returns.
