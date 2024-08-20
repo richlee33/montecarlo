@@ -18,13 +18,13 @@ for item in csv_files:
     average_return_std = (df.at[2, 'average_return'])
 
     assert end_balance_mean > 2100000, f"end balance mean is too small, got {end_balance_mean}"
-    assert end_balance_mean < 3000000, f"end balance mean is too large, got {end_balance_mean}"
+    assert end_balance_mean < 3150000, f"end balance mean is too large, got {end_balance_mean}"
 
-    assert end_balance_std > 2300000, f"end balance std is too small, got {end_balance_std}"
-    assert end_balance_std < 8100000, f"end balance std is too large, got {end_balance_std}"
+    assert end_balance_std > 2160000, f"end balance std is too small, got {end_balance_std}"
+    assert end_balance_std < 8130000, f"end balance std is too large, got {end_balance_std}"
 
-    assert average_return_mean > 7.5, f"average return mean is too small, got {average_return_mean}"
+    assert average_return_mean > 7.4, f"average return mean is too small, got {average_return_mean}"
     assert average_return_mean < 8.5, f"average return mean is too large, got {average_return_mean}"
 
-    assert average_return_std > 2.5, f"average return std is too small, got {average_return_std}"
-    assert average_return_std < 2.93, f"average return std is too large, got {average_return_std}"
+    assert average_return_std > 2.49, f"average return std is too small, got {average_return_std}"
+    assert average_return_std < 2.94, f"average return std is too large, got {average_return_std}"

@@ -71,7 +71,8 @@ print("=" * 6 + " End Balance Summary Table %s Runs " %(num_reps) + "=" * 6)
 print(df_all_stats.describe().round(0))
 print("=" * 60)
 
-success_rate = df_all_stats[df_all_stats['end_balance'] > end_balance_goal].count()['end_balance'] / num_reps
+success_rate = float(df_all_stats[df_all_stats['end_balance'] > end_balance_goal].count()['end_balance']) / float(num_reps)
+
 print("Success rate of end balance greater than %s: %s" %(end_balance_goal, success_rate))
 
 # prepare the save file names

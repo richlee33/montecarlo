@@ -21,7 +21,7 @@ Always remember: Past performance is no guarantee of future results.
 **This is a programming exercise and not financial advice.**
 
 ## Set-Up
-Modern version of [python3](https://www.python.org/downloads/), ie. 3.8 or newer.
+Modern version of [python3](https://www.python.org/downloads/), ie. 3.11 or newer.
 
 ## Installation
 Set up environment:

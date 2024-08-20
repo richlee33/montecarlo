@@ -1,3 +1,8 @@
+/bin
+/lib
+/share
+pyvenv.cfg
+.DS_Store
 venv/
 *.csv
 results/*.png
