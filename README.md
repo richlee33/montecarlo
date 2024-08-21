@@ -40,6 +40,13 @@ $ pip install -r requirements.txt
 $ python main.py
 ```
 
+## Run with Docker
+```sh
+$ docker build . -t "montecarlo"
+$ docker run -v /tmp:/code/results montecarlo
+```
+Output files can be examined in the local host's `tmp` directory
+
 ### Sample Output:
 ```
 ====== End Balance Summary Table 500 Runs ======
