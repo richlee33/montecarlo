@@ -21,10 +21,19 @@ Always remember: Past performance is no guarantee of future results.
 
 **This is a programming exercise and not financial advice.**
 
-## Set-Up
+## Run with Docker
+```sh
+$ git clone <repo url>
+$ cd montecarlo
+$ docker build . -t "montecarlo"
+$ docker run -v /tmp:/code/results montecarlo
+```
+Output files such as the end balance distribution histogram and summary statistics can be examined in the local host's `tmp` directory
+
+## Local Set-Up
 Modern version of [python3](https://www.python.org/downloads/), ie. 3.11 or newer.
 
-## Installation
+### Installation
 Set up environment:
 ```sh
 $ git clone <repo url>
@@ -35,19 +44,12 @@ $ source bin/activate
 $ pip install -r requirements.txt
 ```
 
-## Run
+### Run
 ```sh
 $ python main.py
 ```
 
-## Run with Docker
-```sh
-$ docker build . -t "montecarlo"
-$ docker run -v /tmp:/code/results montecarlo
-```
-Output files can be examined in the local host's `tmp` directory
-
-### Sample Output:
+## Sample Output:
 ```
 ====== End Balance Summary Table 500 Runs ======
        start_balance  contribution  end_balance  average_return
