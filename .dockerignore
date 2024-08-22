@@ -1,0 +1,15 @@
+**/bin
+**/lib
+**/share
+pyvenv.cfg
+**/.DS_Store
+**/venv
+*.csv
+**/results
+.idea
+.gitignore
+Dockerfile
+.dockerignore
+README.md
+**/docs
+**/include
