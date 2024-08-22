@@ -26,7 +26,7 @@ Always remember: Past performance is no guarantee of future results.
 $ git clone <repo url>
 $ cd montecarlo
 $ docker build . -t "montecarlo"
-$ docker run -rm -v /tmp:/code/results montecarlo
+$ docker run --rm -v /tmp:/code/results montecarlo
 ```
 Output files such as the end balance distribution histogram and summary statistics can be examined in the local host's `/tmp` directory
 
